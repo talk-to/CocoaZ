@@ -1,0 +1,14 @@
+PODS:
+  - CocoaZ (1.2.0)
+
+DEPENDENCIES:
+  - CocoaZ (from `../`)
+
+EXTERNAL SOURCES:
+  CocoaZ:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CocoaZ: 87c0abd1725beb1508dd99ff001b1294e3bd98b8
+
+COCOAPODS: 0.33.1

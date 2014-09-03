@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Tests/CocoaZTests.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:CocoaZ"
+      name = "CocoaZ">
+      <FileRef
+         location = "group:TDTZCommon.h">
+      </FileRef>
+      <FileRef
+         location = "group:TDTZCompressor.h">
+      </FileRef>
+      <FileRef
+         location = "group:TDTZCompressor.m">
+      </FileRef>
+      <FileRef
+         location = "group:TDTZDecompressor.h">
+      </FileRef>
+      <FileRef
+         location = "group:TDTZDecompressor.m">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Tests/Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
