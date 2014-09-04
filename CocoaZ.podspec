@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary  = 'Objective C wrapper over zlib'
   s.homepage = 'https://github.com/talk-to/CocoaZ'
   s.author   = 'Talk.to'
-  s.license  = { :type => 'COMMERCIAL', :text => 'Property of Talk.to FZC' }
+  s.license  = 'BSD'
   s.source   = {
     :git => 'git@github.com:talk-to/CocoaZ.git',
     :tag => "#{s.version}"
