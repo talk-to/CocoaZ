@@ -2,6 +2,10 @@
 
 #import "TDTZCommon.h"
 
+// Keys for values included in any compression exception.
+FOUNDATION_EXPORT NSString * const TDTZCompressorException;
+FOUNDATION_EXPORT NSString * const TDTZCompressorExceptionCodeKey;
+
 /**
  This class provides a wrapper over the compression related functions provided by zlib
  */
@@ -39,13 +43,13 @@
 /**
  The designated initializer -- needs compression format and compression level
  */
-- (id)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat level:(int)level;
+- (instancetype)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat level:(int)level;
 
 /**
  Convenience initializer with only compression format.
  It uses Z_DEFAULT_COMPRESSION as compression level
  */
-- (id)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat;
+- (instancetype)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat;
 
 /**
  Sends all input data to the internal zStream and returns any output data proivded
