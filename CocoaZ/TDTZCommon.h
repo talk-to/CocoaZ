@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, TDTCompressionFormat) {
   TDTCompressionFormatDeflate,
   TDTCompressionFormatGzip
-} TDTCompressionFormat;
+};
+

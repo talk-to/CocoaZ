@@ -1,8 +1,8 @@
 #import "TDTZDecompressor.h"
 #include <zlib.h>
 
-static NSString *const TDTZDecompressorException = @"TDTZDecompressorException";
-static NSString *const TDTZExceptionCodeKey = @"TDTZExceptionCodeKey";
+NSString *const TDTZDecompressorException = @"TDTZDecompressorException";
+NSString *const TDTZDecompressorExceptionCodeKey = @"TDTZExceptionCodeKey";
 static const NSInteger OutBufferChunkSizeDefault = 2048;
 static const NSInteger ReadChunkSize = 4096; // in bytes
 
@@ -20,10 +20,10 @@ static const NSInteger ReadChunkSize = 4096; // in bytes
 + (NSException *)exceptionWithCode:(int)code msg:(const char *)msg {
   return [NSException exceptionWithName:TDTZDecompressorException
                                  reason:@(msg)
-                               userInfo:@{TDTZExceptionCodeKey: @(code)}];
+                               userInfo:@{TDTZDecompressorExceptionCodeKey: @(code)}];
 }
 
-- (id)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat {
+- (instancetype)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat {
   self = [super init];
   if (self) {
     _isZStreamInitialized = NO;

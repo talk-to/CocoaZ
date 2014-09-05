@@ -2,6 +2,10 @@
 
 #import "TDTZCommon.h"
 
+// Keys for values included in any decompression exception.
+FOUNDATION_EXPORT NSString * const TDTZDecompressorException;
+FOUNDATION_EXPORT NSString * const TDTZDecompressorExceptionCodeKey;
+
 /**
  This class provides a wrapper over the decompression related functions provided by zlib
  */
@@ -31,7 +35,7 @@
 /**
  Initialize with the given decompression format.
  */
-- (id)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat;
+- (instancetype)initWithCompressionFormat:(TDTCompressionFormat)compressionFormat;
 
 /**
  Sends all input data to the internal zStream and returns any output data proivded
