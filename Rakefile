@@ -49,7 +49,7 @@ def push
   local_version = local_spec(podspec_path).version
   exit unless confirm "Are you sure you want to release version #{red(local_version)}"
   sh "git commit -m 'Release #{local_version}' #{podspec_path} Tests/Podfile.lock"
-  sh "git tag #{local_version}"
+  sh "git tag -a -m 'Release #{local_version}' #{local_version}"
   sh "git push origin master"
   sh "git push origin #{local_version}"
   sh "pod trunk push #{podspec_path}"
