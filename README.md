@@ -90,8 +90,9 @@ For any other feedback or suggestion, contact the maintainers (listed below).
 
 ## Maintainers
 
-* [Chaitanya Gupta](mailto:chaitanya.g@directi.com)
-* [Udit Aggarwal](mailto:udit.ag@directi.com)
+* [Chaitanya Gupta](https://github.com/chaitanyagupta) ([@chaitanya_gupta](https://twitter.com/chaitanya_gupta))
+* [Udit Aggarwal](https://github.com/uditiiita) ([@MastChamp](https://twitter.com/MastChamp))
+* [Abhay Singh](https://github.com/AbhaySingh) ([@AbhaySingh35](https://twitter.com/AbhaySingh35))
 
 [zlib]: http://zlib.net/
 [zlib manual]: http://zlib.net/manual.html
