@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'CocoaZ'
-  s.version  = '1.3.0'
+  s.version  = '1.4.0'
   s.summary  = 'Objective C wrapper over zlib'
   s.homepage = 'https://github.com/talk-to/CocoaZ'
   s.author   = 'Talk.to'
