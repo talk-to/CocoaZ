@@ -1,21 +1,18 @@
 INITIAL_VERSION = '0.1.0'
 
 namespace :release do
-  task :prompt do
-    release
+  task :prepare do
+    prepare
   end
   desc "Release the next version of the Pod"
-  task :next do
-    release :use_defaults => true
+  task :push do
+    push
   end
 end
 
 desc "Release a new version of the Pod"
-task :release => 'release:prompt'
 
-def release(**options)
-  use_defaults = options[:use_defaults]
-
+def prepare
   if current_branch != 'master'
     puts "Error: you need to be on the `master` branch to do a release"
     exit
@@ -40,22 +37,22 @@ def release(**options)
 
   next_version = bump_version(current_version)
 
-  if use_defaults
-    new_version = next_version
-
-    puts "* Releasing version #{red(new_version)}"
-  else
-    version_prompt = "Enter the new version"
-    new_version = ask_user :prompt => version_prompt, :default => next_version
-    exit unless confirm "Are you sure you want to release version #{red(new_version)}"
-  end
+  version_prompt = "Enter the new version"
+  new_version = ask_user :prompt => version_prompt, :default => next_version
 
   replace_spec_version(podspec_path, current_version, new_version)
+  sh "cd Tests && pod update --no-repo-update #{local_spec(podspec_path).name}"
+end
 
-  sh "git commit #{podspec_path} -m 'Release #{new_version}'"
-  sh "git tag #{new_version}"
+def push
+  podspec_path = any_podspec_in_current_dir
+  local_version = local_spec(podspec_path).version
+  exit unless confirm "Are you sure you want to release version #{red(local_version)}"
+  sh "git commit -m 'Release #{local_version}' #{podspec_path} Tests/Podfile.lock"
+  sh "git tag #{local_version}"
   sh "git push origin master"
-  sh "git push origin #{new_version}"
+  sh "git push origin #{local_version}"
+  sh "pod trunk push #{podspec_path}"
 end
 
 def current_branch
@@ -64,6 +61,11 @@ end
 
 def any_podspec_in_current_dir
   `ls -1 *.podspec`.split("\n").first
+end
+
+def local_spec(podspec_path)
+  require 'cocoapods-core'
+  eval(`cat #{podspec_path}`)
 end
 
 def spec_version(branch, podspec_path)
