@@ -2,7 +2,7 @@
 #include <zlib.h>
 
 NSString *const TDTZCompressorException = @"TDTZCompressorException";
-NSString *const TDTZCompressorExceptionCodeKey = @"TDTZExceptionCodeKey";
+NSString *const TDTZCompressorExceptionCodeKey = @"TDTZCompressorExceptionCodeKey";
 static const NSInteger OutBufferChunkSizeDefault = 2048;
 static const NSInteger ReadChunkSize = 4096; // in bytes
 
