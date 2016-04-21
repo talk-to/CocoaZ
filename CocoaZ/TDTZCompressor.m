@@ -75,7 +75,7 @@ static const NSInteger ReadChunkSize = 4096; // in bytes
       zStream->avail_out = outBufferChunkSize;
     }
     int result = deflate(zStream, flush);
-    if (result != Z_OK && result != Z_STREAM_END) {
+    if (result != Z_OK && result != Z_STREAM_END && result != Z_BUF_ERROR) {
       @throw [[self class] exceptionWithCode : result msg : zStream->msg];
     }
     bytesCompressed += (outBufferChunkSize - zStream->avail_out);
