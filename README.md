@@ -88,6 +88,10 @@ To report any issues with the library, create an issue on [Github](https://githu
 
 For any other feedback or suggestion, contact the maintainers (listed below).
 
+## Making Releases (For Maintainers)
+
+See `rake release:prepare` and `rake release:push`.
+
 ## Maintainers
 
 * [Chaitanya Gupta](https://github.com/chaitanyagupta) ([@chaitanya_gupta](https://twitter.com/chaitanya_gupta))
