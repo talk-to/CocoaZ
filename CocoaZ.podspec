@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.author   = 'Talk.to'
   s.license  = 'BSD'
   s.source   = {
-    :git => 'git@github.com:talk-to/CocoaZ.git',
+    :git => 'https://github.com/talk-to/CocoaZ.git',
     :tag => "#{s.version}"
   }
   s.requires_arc = true
