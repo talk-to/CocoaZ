@@ -29,6 +29,8 @@
 		ADBAFD6918AB65CE0020865B /* OSXTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OSXTests-Prefix.pch"; sourceTree = "<group>"; };
 		ADBAFD7318AB750B0020865B /* TDTZCompressorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTZCompressorTests.m; sourceTree = "<group>"; };
 		ADBAFD7618AB751B0020865B /* TDTZDecompressorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTZDecompressorTests.m; sourceTree = "<group>"; };
+		B21E4427B8AE585F5CE8D275 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
+		F5740A6D099C2143AB842AEF /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,13 +46,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41E474A45E915105768A7799 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5740A6D099C2143AB842AEF /* Pods-osx.debug.xcconfig */,
+				B21E4427B8AE585F5CE8D275 /* Pods-osx.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ADBAFD1A18AB651C0020865B = {
 			isa = PBXGroup;
 			children = (
 				ADBAFD6118AB65CE0020865B /* OSXTests */,
 				ADBAFD2518AB651C0020865B /* Frameworks */,
 				ADBAFD2418AB651C0020865B /* Products */,
-				3C84F34490904BC5B5CE2777 /* Pods-osx.xcconfig */,
+				41E474A45E915105768A7799 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +118,7 @@
 				ADBAFD5C18AB65CE0020865B /* Frameworks */,
 				ADBAFD5D18AB65CE0020865B /* Resources */,
 				17B7838D1B094B0D89186589 /* Copy Pods Resources */,
+				D8E8E7EDF449023FE212AE17 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,7 +180,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-osx-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51AC4956CDA14783B7A31560 /* Check Pods Manifest.lock */ = {
@@ -184,6 +196,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D8E8E7EDF449023FE212AE17 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -284,7 +311,7 @@
 		};
 		ADBAFD6B18AB65CE0020865B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C84F34490904BC5B5CE2777 /* Pods-osx.xcconfig */;
+			baseConfigurationReference = F5740A6D099C2143AB842AEF /* Pods-osx.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -305,7 +332,7 @@
 		};
 		ADBAFD6C18AB65CE0020865B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C84F34490904BC5B5CE2777 /* Pods-osx.xcconfig */;
+			baseConfigurationReference = B21E4427B8AE585F5CE8D275 /* Pods-osx.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
