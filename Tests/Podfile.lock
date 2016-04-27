@@ -1,5 +1,5 @@
 PODS:
-  - CocoaZ (1.4.0)
+  - CocoaZ (1.4.1)
 
 DEPENDENCIES:
   - CocoaZ (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CocoaZ: 3a7fc2f18bf194ce95eddaaadb2d8b9ac245d939
+  CocoaZ: bbe1af07c2174ea34cfd635ffe6977f1237f6236
 
 COCOAPODS: 0.39.0
