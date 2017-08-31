@@ -45,27 +45,37 @@ static NSString * const JARFileName = @"zlib-1.0-SNAPSHOT-jar-with-dependencies"
   return request;
 }
 
-- (void)testStreamCompression {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
-
-  NSString *inputString = @"Test string data";
-  NSURLRequest *request = [self compressRequestWithID:@"test" data:inputString];
+- (void)compressString:(NSString *)string completion:(void(^)(NSData *compressedData, NSError *error))completion {
+  NSURLRequest *request = [self compressRequestWithID:@"test" data:string];
 
   NSURLSession *session = [NSURLSession sharedSession];
   NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                XCTAssertNil(error);
-                                                NSDictionary *res = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-                                                XCTAssertNil(error);
-                                                NSData *compressed = [[NSData alloc] initWithBase64EncodedData:res[@"data"] options:0];
-                                                XCTAssertNotNil(compressed);
-                                                TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
-                                                NSData *decompressed = [decompressor flushData:compressed];
-                                                NSString *orig = [[NSString alloc] initWithData:decompressed encoding:NSUTF8StringEncoding];
-                                                XCTAssertEqualObjects(inputString, orig);
-                                                [expectation fulfill];
+                                                if (error) {
+                                                  completion(nil, error);
+                                                } else {
+                                                  NSDictionary *res = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                                  XCTAssertNil(error);
+                                                  NSData *compressed = [[NSData alloc] initWithBase64EncodedData:res[@"data"] options:0];
+                                                  XCTAssertNotNil(compressed);
+                                                  completion(compressed, nil);
+                                                }
                                               }];
   [dataTask resume];
+}
+
+- (void)testStreamCompression {
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
+
+  NSString *string = @"Test string data";
+  [self compressString:string completion:^(NSData *compressedData, NSError *error) {
+    XCTAssertNil(error);
+    TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
+    NSData *decompressed = [decompressor flushData:compressedData];
+    NSString *orig = [[NSString alloc] initWithData:decompressed encoding:NSUTF8StringEncoding];
+    XCTAssertEqualObjects(string, orig);
+    [expectation fulfill];
+  }];
 
   [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
     NSLog(@"Expectation not fulfilled");
