@@ -7,7 +7,7 @@ static NSString * const JARFileName = @"zlib-1.0-SNAPSHOT-jar-with-dependencies"
 
 @interface TDTStreamingTests : XCTestCase
 
-@property NSTask *JARTask;
+@property NSTask *compressionServerTask;
 
 @end
 
@@ -16,13 +16,13 @@ static NSString * const JARFileName = @"zlib-1.0-SNAPSHOT-jar-with-dependencies"
 - (void)setUp {
   [super setUp];
   NSString *launchPath = [[NSBundle bundleForClass:[self class]] pathForResource:JARFileName ofType:@"jar"];
-  self.JARTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:@[@"-jar", launchPath]];
+  self.compressionServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:@[@"-jar", launchPath]];
   NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
   [[NSRunLoop currentRunLoop] runUntilDate:date];
 }
 
 - (void)tearDown {
-  [self.JARTask terminate];
+  [self.compressionServerTask terminate];
   [super tearDown];
 }
 
