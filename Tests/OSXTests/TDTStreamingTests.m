@@ -165,7 +165,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
     [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
       XCTAssertNil(error);
     }];
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.1];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.01];
     [[NSRunLoop currentRunLoop] runUntilDate:date];
     NSLog(@"*** Ended %@ %@", @(i), [NSDate date]);
   }
