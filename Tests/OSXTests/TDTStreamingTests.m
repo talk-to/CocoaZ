@@ -127,7 +127,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   }];
 
   [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
-    NSLog(@"Expectation not fulfilled");
+    XCTAssertNil(error);
   }];
 }
 
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
     [expectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
-    NSLog(@"Expectation not fulfilled");
+    XCTAssertNil(error);
   }];
 }
 
