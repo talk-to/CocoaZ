@@ -108,11 +108,15 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   [dataTask resume];
 }
 
+- (NSString *)randomString {
+  return [[NSUUID UUID] UUIDString];
+}
+
 - (void)testStreamDecompression {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
 
-  NSString *string = @"Test string data";
-  [self compressString:string ID:@"test" completion:^(NSData *compressedData, NSError *error) {
+  NSString *string = [self randomString];
+  [self compressString:string ID:@"ID" completion:^(NSData *compressedData, NSError *error) {
     XCTAssertNil(error);
     TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
     NSData *decompressed = [decompressor flushData:compressedData];
@@ -130,10 +134,10 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Received decompressed data"];
 
   TDTZCompressor *compressor = [[TDTZCompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
-  NSString *string = @"Test string data";
+  NSString *string = [self randomString];
   NSData *compressedData = [compressor flushData:[string dataUsingEncoding:NSUTF8StringEncoding]];
   NSString *base64EncodedData = [compressedData base64EncodedStringWithOptions:0];
-  [self decompressString:base64EncodedData ID:@"test" completion:^(NSString *decompressedData, NSError *error) {
+  [self decompressString:base64EncodedData ID:@"ID" completion:^(NSString *decompressedData, NSError *error) {
     XCTAssertNil(error);
     XCTAssertEqualObjects(decompressedData, string);
     [expectation fulfill];
