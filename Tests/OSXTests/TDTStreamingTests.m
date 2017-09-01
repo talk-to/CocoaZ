@@ -120,7 +120,8 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
     XCTAssertNil(error);
     TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
     NSData *decompressed = [decompressor flushData:compressedData];
-    NSString *orig = [[NSString alloc] initWithData:decompressed encoding:NSUTF8StringEncoding];
+    NSString *orig = [[NSString alloc] initWithData:decompressed
+                                           encoding:NSUTF8StringEncoding];
     XCTAssertEqualObjects(string, orig);
     [expectation fulfill];
   }];
