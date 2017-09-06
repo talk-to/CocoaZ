@@ -3,7 +3,7 @@
 #import <CocoaZ/TDTZCompressor.h>
 #import <CocoaZ/TDTZDecompressor.h>
 
-static NSString * const JARFileName = @"zlib-1.0-SNAPSHOT-jar-with-dependencies";
+static NSString * const JARFileName = @"zlib-server";
 
 typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   TDTReductionSchemeCompress,

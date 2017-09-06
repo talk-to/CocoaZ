@@ -11,7 +11,7 @@
 		5D3261CA9050F70287C3441E /* libPods-OSXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216D083769923F6FE5F89D0 /* libPods-OSXTests.a */; };
 		697816E31CCF8071005071CE /* TDTCocoaZBufferErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 697816E21CCF8071005071CE /* TDTCocoaZBufferErrorTests.m */; };
 		8E2DDCA21F557FA30009C2DD /* TDTStreamingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2DDCA11F557FA30009C2DD /* TDTStreamingTests.m */; };
-		8E2DDD551F57DBD40009C2DD /* zlib-1.0-SNAPSHOT-jar-with-dependencies.jar in Resources */ = {isa = PBXBuildFile; fileRef = 8E2DDD171F56C2D80009C2DD /* zlib-1.0-SNAPSHOT-jar-with-dependencies.jar */; };
+		8E2DDD551F57DBD40009C2DD /* zlib-server.jar in Resources */ = {isa = PBXBuildFile; fileRef = 8E2DDD171F56C2D80009C2DD /* zlib-server.jar */; };
 		ADBAFD6018AB65CE0020865B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBAFD3918AB655F0020865B /* XCTest.framework */; };
 		ADBAFD6618AB65CE0020865B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADBAFD6418AB65CE0020865B /* InfoPlist.strings */; };
 		ADBAFD7418AB750B0020865B /* TDTZCompressorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBAFD7318AB750B0020865B /* TDTZCompressorTests.m */; };
@@ -26,7 +26,7 @@
 		54BCAD9C19B6D3B700164F72 /* TDTRandomInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTRandomInput.m; sourceTree = "<group>"; };
 		697816E21CCF8071005071CE /* TDTCocoaZBufferErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTCocoaZBufferErrorTests.m; sourceTree = "<group>"; };
 		8E2DDCA11F557FA30009C2DD /* TDTStreamingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTStreamingTests.m; sourceTree = "<group>"; };
-		8E2DDD171F56C2D80009C2DD /* zlib-1.0-SNAPSHOT-jar-with-dependencies.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; path = "zlib-1.0-SNAPSHOT-jar-with-dependencies.jar"; sourceTree = "<group>"; };
+		8E2DDD171F56C2D80009C2DD /* zlib-server.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; path = "zlib-server.jar"; sourceTree = "<group>"; };
 		ADBAFD2618AB651C0020865B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADBAFD3918AB655F0020865B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		ADBAFD5F18AB65CE0020865B /* OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +62,7 @@
 		8E2DDCA31F56C2D80009C2DD /* StreamingTestsHelper */ = {
 			isa = PBXGroup;
 			children = (
-				8E2DDD171F56C2D80009C2DD /* zlib-1.0-SNAPSHOT-jar-with-dependencies.jar */,
+				8E2DDD171F56C2D80009C2DD /* zlib-server.jar */,
 			);
 			path = StreamingTestsHelper;
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E2DDD551F57DBD40009C2DD /* zlib-1.0-SNAPSHOT-jar-with-dependencies.jar in Resources */,
+				8E2DDD551F57DBD40009C2DD /* zlib-server.jar in Resources */,
 				ADBAFD6618AB65CE0020865B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
