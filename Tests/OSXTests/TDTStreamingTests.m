@@ -115,9 +115,15 @@ static NSTask *compressionServerTask;
   return [[NSUUID UUID] UUIDString];
 }
 
+- (void)breathe {
+  NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.1];
+  [[NSRunLoop currentRunLoop] runUntilDate:date];
+}
+
 - (void)testStreamDecompression {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
 
+  [self breathe];
   NSString *string = [self randomString];
   [self compressString:string ID:[self randomString] completion:^(NSData *compressedData, NSError *error) {
     XCTAssertNil(error);
@@ -137,6 +143,7 @@ static NSTask *compressionServerTask;
 - (void)testStreamCompression {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Received decompressed data"];
 
+  [self breathe];
   TDTZCompressor *compressor = [[TDTZCompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
   NSString *string = [self randomString];
   NSData *compressedData = [compressor flushData:[string dataUsingEncoding:NSUTF8StringEncoding]];
@@ -155,6 +162,7 @@ static NSTask *compressionServerTask;
   TDTZCompressor *compressor = [[TDTZCompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
   NSString *ID = [self randomString];
   for (NSUInteger i = 0; i < 1000; ++i) {
+    [self breathe];
     NSLog(@"*** Started %@ %@", @(i), [NSDate date]);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Received decompressed data"];
     NSString *string = [self randomString];
@@ -168,8 +176,6 @@ static NSTask *compressionServerTask;
     [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
       XCTAssertNil(error);
     }];
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.1];
-    [[NSRunLoop currentRunLoop] runUntilDate:date];
     NSLog(@"*** Ended %@ %@", @(i), [NSDate date]);
   }
 }
@@ -178,6 +184,7 @@ static NSTask *compressionServerTask;
   TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
   NSString *ID = [self randomString];
   for (NSUInteger i = 0; i < 1000; ++i) {
+    [self breathe];
     NSLog(@"*** Started %@ %@", @(i), [NSDate date]);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
     NSString *string = [self randomString];
@@ -194,8 +201,6 @@ static NSTask *compressionServerTask;
       XCTAssertNil(error);
     }];
 
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.1];
-    [[NSRunLoop currentRunLoop] runUntilDate:date];
     NSLog(@"*** Ended %@ %@", @(i), [NSDate date]);
   }
 }
