@@ -134,7 +134,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
 
   NSString *string = [self randomString];
-  [self compressString:string ID:@"ID" completion:^(NSData *compressedData, NSError *error) {
+  [self compressString:string ID:[self randomString] completion:^(NSData *compressedData, NSError *error) {
     XCTAssertNil(error);
     TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
     NSData *decompressed = [decompressor flushData:compressedData];
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   NSString *string = [self randomString];
   NSData *compressedData = [compressor flushData:[string dataUsingEncoding:NSUTF8StringEncoding]];
   NSString *base64EncodedData = [compressedData base64EncodedStringWithOptions:0];
-  [self decompressString:base64EncodedData ID:@"ID" completion:^(NSString *decompressedData, NSError *error) {
+  [self decompressString:base64EncodedData ID:[self randomString] completion:^(NSString *decompressedData, NSError *error) {
     XCTAssertNil(error);
     XCTAssertEqualObjects(decompressedData, string);
     [expectation fulfill];
@@ -168,7 +168,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
 
 - (void)testStreamCompressionForMultiplePackets {
   TDTZCompressor *compressor = [[TDTZCompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
-  NSString *ID = @"ID";
+  NSString *ID = [self randomString];
   for (NSUInteger i = 0; i < 1000; ++i) {
     NSLog(@"*** Started %@ %@", @(i), [NSDate date]);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Received decompressed data"];
@@ -191,7 +191,7 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
 
 - (void)testStreamDecompressionForMultiplePackets {
   TDTZDecompressor *decompressor = [[TDTZDecompressor alloc] initWithCompressionFormat:TDTCompressionFormatDeflate];
-  NSString *ID = @"ID";
+  NSString *ID = [self randomString];
   for (NSUInteger i = 0; i < 1000; ++i) {
     NSLog(@"*** Started %@ %@", @(i), [NSDate date]);
     XCTestExpectation *expectation = [self expectationWithDescription:@"Received compressed data"];
