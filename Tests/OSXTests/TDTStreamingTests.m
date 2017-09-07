@@ -13,15 +13,32 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
 @interface TDTStreamingTests : XCTestCase
 
 @property NSTask *compressionServerTask;
+@property NSString *port;
 
 @end
 
 @implementation TDTStreamingTests
 
++ (NSString *)port {
+  static NSInteger Port;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    Port = 8080;
+  });
+  __block NSString *newPort;
+  @synchronized (self) {
+    newPort = [NSString stringWithFormat:@"%@", @(Port)];
+    Port++;
+  }
+  return newPort;
+}
+
 - (void)setUp {
   [super setUp];
   NSString *launchPath = [[NSBundle bundleForClass:[self class]] pathForResource:JARFileName ofType:@"jar"];
-  self.compressionServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:@[@"-jar", launchPath]];
+  self.port = [[self class] port];
+  NSArray *arguments = @[@"-jar", launchPath, self.port];
+  self.compressionServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:arguments];
   NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
   [[NSRunLoop currentRunLoop] runUntilDate:date];
 }
@@ -32,7 +49,8 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
 }
 
 - (NSURL *)endpointForScheme:(TDTReductionScheme)scheme {
-  NSURL *URL = [NSURL URLWithString:@"http://localhost:8080/"];
+  NSString *URLString = [NSString stringWithFormat:@"http://localhost:%@/", self.port];
+  NSURL *URL = [NSURL URLWithString:URLString];
   switch (scheme) {
     case TDTReductionSchemeCompress:
       return [NSURL URLWithString:@"compress" relativeToURL:URL];
