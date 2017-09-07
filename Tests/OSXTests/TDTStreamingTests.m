@@ -4,6 +4,7 @@
 #import <CocoaZ/TDTZDecompressor.h>
 
 static NSString * const JARFileName = @"zlib-server";
+static NSString * const Port = @"8080";
 
 typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
   TDTReductionSchemeCompress,
@@ -12,44 +13,28 @@ typedef NS_ENUM(NSUInteger, TDTReductionScheme) {
 
 @interface TDTStreamingTests : XCTestCase
 
-@property NSTask *compressionServerTask;
-@property NSString *port;
-
 @end
+
+static NSTask *compressionServerTask;
 
 @implementation TDTStreamingTests
 
-+ (NSString *)port {
-  static NSInteger Port;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    Port = 8080;
-  });
-  __block NSString *newPort;
-  @synchronized (self) {
-    newPort = [NSString stringWithFormat:@"%@", @(Port)];
-    Port++;
-  }
-  return newPort;
-}
-
-- (void)setUp {
++ (void)setUp {
   [super setUp];
   NSString *launchPath = [[NSBundle bundleForClass:[self class]] pathForResource:JARFileName ofType:@"jar"];
-  self.port = [[self class] port];
-  NSArray *arguments = @[@"-jar", launchPath, self.port];
-  self.compressionServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:arguments];
-  NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
+  NSArray *arguments = @[@"-jar", launchPath, Port];
+  compressionServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/java" arguments:arguments];
+  NSDate *date = [NSDate dateWithTimeIntervalSinceNow:2];
   [[NSRunLoop currentRunLoop] runUntilDate:date];
 }
 
-- (void)tearDown {
-  [self.compressionServerTask terminate];
++ (void)tearDown {
+  [compressionServerTask terminate];
   [super tearDown];
 }
 
 - (NSURL *)endpointForScheme:(TDTReductionScheme)scheme {
-  NSString *URLString = [NSString stringWithFormat:@"http://localhost:%@/", self.port];
+  NSString *URLString = [NSString stringWithFormat:@"http://localhost:%@/", Port];
   NSURL *URL = [NSURL URLWithString:URLString];
   switch (scheme) {
     case TDTReductionSchemeCompress:
